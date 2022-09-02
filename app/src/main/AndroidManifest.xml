@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.elgin.kotlin_intent_digital_hub_smartpos">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +15,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kotlin_IntentDigitalHub_SmartPOS"
-        tools:targetApi="31" />
+        tools:targetApi="31">
+
+        <activity
+            android:name=".Activities.Printer.PrinterPages.PrinterImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Printer.PrinterPages.PrinterBarCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Printer.PrinterPages.PrinterTextActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Printer.PrinterMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ElginPay.ElginPayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BarCodeReader.BarCodeReaderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
 
 </manifest>

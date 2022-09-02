@@ -6,7 +6,6 @@ import com.google.gson.JsonObject
 
 
 class SetPersonalizacao(
-    functionName: String,
     private val iconeToolbar: String?,
     private val fonte: String?,
     private val corFonte: String?,
@@ -17,7 +16,7 @@ class SetPersonalizacao(
     private val corFundoTeclado: String?,
     private val corTextoCaixaEdicao: String?,
     private val corSeparadorMenu: String?
-): ElginPayCommand(functionName) {
+): ElginPayCommand("setPersonalizacao") {
 
 
     override fun functionParametersJson(): JsonObject? {

@@ -2,6 +2,7 @@ package com.elgin.kotlin_intent_digital_hub_smartpos.IntentDigitalHubService
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import com.google.gson.JsonArray
 import com.elgin.kotlin_intent_digital_hub_smartpos.IntentDigitalHubService.IntentDigitalHubCommand
 
@@ -20,8 +21,8 @@ object IntentDigitalHubCommandStarter {
         requestCode: Int
     ) {
         //Captura o módulo filtro do correspondete do comando;
-        val modulePathOfCommand: String? =
-            intentDigitalHubCommand.correspondingIntentModule!!.getIntentPath()
+        val modulePathOfCommand: String =
+            intentDigitalHubCommand.correspondingIntentModule.intentPath
 
         //Captura o json do comando correspondente em string.
         val commandJson: String = intentDigitalHubCommand.getCommandJSON().toString()
@@ -32,6 +33,9 @@ object IntentDigitalHubCommandStarter {
         //Insere, como extra, na intent o json de comando do comando correspondente, sob a chave "comando". Diferente da função abaixo, que já considera o comando como um Array, nesta deve ser inserido a formatação de array no comando, uma vez que
         //para o IDH é necessário enviar, sempre, um Array de Json, corresponde aos comandos, por este motivo é adicionado "[]" formatando este único comando que é inciado por essa função.
         intent.putExtra("comando", "[$commandJson]")
+
+        Log.d("comando", "[$commandJson]");
+
         //Inicia a atividade com base na referência da atividade passada, enviando a intent configurada e o requestCode é utilizado para filtrar o retorno em @onActivityResult.
         activity.startActivityForResult(intent, requestCode)
     }
@@ -55,7 +59,7 @@ object IntentDigitalHubCommandStarter {
 
         //Captura o módulo filtro do correspondete do comando, através de quaisquer elemento da lista.
         val modulePathOfCommand: String? =
-            intentDigitalHubCommandList[0].correspondingIntentModule!!.getIntentPath()
+            intentDigitalHubCommandList[0].correspondingIntentModule.intentPath
 
         //Cria o json do comando correspondente em string, a partir da concatenação dos comandos da lista de comandos.
         val commandJson = concatenateIDHCommandList(intentDigitalHubCommandList)
@@ -65,6 +69,8 @@ object IntentDigitalHubCommandStarter {
 
         //Insere, como extra, na intent o json de comando do comando correspondente, sob a chave "comando".
         intent.putExtra("comando", commandJson)
+
+        Log.d("comando", commandJson);
 
         //Inicia a atividade com base na referência da atividade passada, enviando a intent configurada e o requestCode é utilizado para filtrar o retorno em @onActivityResult.
         activity.startActivityForResult(intent, requestCode)

@@ -9,7 +9,7 @@ import com.elgin.kotlin_intent_digital_hub_smartpos.Activities.BarCodeReader.Bar
 import com.elgin.kotlin_intent_digital_hub_smartpos.Activities.ElginPay.ElginPayActivity
 import com.elgin.kotlin_intent_digital_hub_smartpos.Activities.Printer.PrinterMenuActivity
 
-open class MainActivity :AppCompatActivity(){
+open class MainActivity : AppCompatActivity() {
     private var buttonElginPay: LinearLayout? = null
     private var buttonPrinterMenu: LinearLayout? = null
     private var buttonBarCodeReader: LinearLayout? = null

@@ -12,14 +12,14 @@ import org.json.JSONArray
 import org.json.JSONException
 
 
-class BarCodeReaderActivity (
-    private var editTextBarCode: EditText,
-    private var editTextBarCodeType: EditText,
-    private var buttonInitializeReading: Button,
-    private var buttonClearField: Button,
-): AppCompatActivity() {
-    //Campos onde o resultado da leitura será exposto.
+class BarCodeReaderActivity (): AppCompatActivity() {
 
+    private lateinit var editTextBarCode: EditText
+    private lateinit var editTextBarCodeType: EditText
+    private lateinit var buttonInitializeReading: Button
+    private lateinit var buttonClearField: Button
+
+    //Campos onde o resultado da leitura será exposto.
 
     private val SCANNER_REQUEST_CODE = 1234
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,16 +33,16 @@ class BarCodeReaderActivity (
         editTextBarCodeType.setFocusable(false)
         buttonInitializeReading = findViewById(R.id.buttonInitializeReading)
         buttonClearField = findViewById(R.id.buttonClearField)
-        buttonInitializeReading.setOnClickListener(View.OnClickListener { v: View? -> startScannerReading() })
-        buttonClearField.setOnClickListener(View.OnClickListener { v: View? ->
+        buttonInitializeReading.setOnClickListener { v: View? -> startScannerReading() }
+        buttonClearField.setOnClickListener { v: View? ->
             editTextBarCode.setText("")
             editTextBarCodeType.setText("")
-        })
+        }
     }
 
     private fun startScannerReading() {
         //Cria o Intent para o scanner com o módulo filtro do SCANNER.
-        val scannerIntent = Intent(IntentDigitalHubModule.SCANNER.getIntentPath())
+        val scannerIntent = Intent(IntentDigitalHubModule.SCANNER.intentPath)
 
         //Inicia o scanner.
         this.startActivityForResult(scannerIntent, 1234)

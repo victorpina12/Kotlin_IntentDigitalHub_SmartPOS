@@ -25,23 +25,22 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 
-class PrinterImageActivity(
+class PrinterImageActivity() : AppCompatActivity() {
+
     //Imagem de pré-visualização.
-    private var imageView: ImageView?,
+    private lateinit var imageView: ImageView
 
     //Botões de seleção de imagem e de impressão.
-    private var buttonSelectImage: Button?,
+    private lateinit var buttonSelectImage: Button
 
     //Botões de seleção de imagem e de impressão.
-    private var buttonPrintImage: Button?,
+    private lateinit var buttonPrintImage: Button
 
     //Checkbox de corte de papel, só será disponibilizada caso o método de impressão escolhido seja por impressora externa.
-    private var checkBoxIsCutPaperImage: CheckBox?,
+    private lateinit var checkBoxIsCutPaperImage: CheckBox
 
     //PATH da imagem a ser impressa.
-    private var pathOfLastSelectedImage: String?,
-
-): AppCompatActivity() {
+    private lateinit var pathOfLastSelectedImage: String
 
     //Int usado para inicio da atividade;
     private val OPEN_GALLERY_FOR_IMAGE_SELECTION_REQUESTCODE = 1
@@ -122,7 +121,7 @@ class PrinterImageActivity(
         )
     }
 
-     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {

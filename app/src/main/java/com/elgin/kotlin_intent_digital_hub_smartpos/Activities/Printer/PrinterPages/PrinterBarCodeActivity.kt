@@ -14,44 +14,41 @@ import com.elgin.kotlin_intent_digital_hub_smartpos.IntentDigitalHubService.TERM
 import com.elgin.kotlin_intent_digital_hub_smartpos.IntentDigitalHubService.TERMICA.Commands.ImpressaoQRCode
 import com.elgin.kotlin_intent_digital_hub_smartpos.R
 
-class PrinterBarCodeActivity(
+class PrinterBarCodeActivity(): AppCompatActivity() {
     //Campo do barCode a ser impresso.
-    private var editTextInputBarCode: EditText?,
+    private lateinit var editTextInputBarCode: EditText
 
     //Spinner/Dropdowns de seleção de tipos de código de barras, largura da impressão e altura da impressão.
-    private var spinnerBarCodeType: Spinner?,
+    private lateinit var spinnerBarCodeType: Spinner
 
     //Spinner/Dropdowns de seleção de tipos de código de barras, largura da impressão e altura da impressão.
-    private var spinnerBarCodeWidth: Spinner?,
+    private lateinit var spinnerBarCodeWidth: Spinner
 
     //Spinner/Dropdowns de seleção de tipos de código de barras, largura da impressão e altura da impressão.
-    private var spinnerBarCodeHeight: Spinner?,
+    private lateinit var spinnerBarCodeHeight: Spinner
 
     //RadioGroup de alinhamento.
-    private var radioGroupAlignBarCode: RadioGroup?,
+    private lateinit var radioGroupAlignBarCode: RadioGroup
 
     //RadioButton de alinhamento no centralizado.
-    private var buttonRadioAlignCenter: RadioButton?,
+    private lateinit var buttonRadioAlignCenter: RadioButton
 
     //Ceckbox de corte de papel. (a opção de corte de papel só é ofericda na impressão por impressora externa, o dispositivo SmartPOS não possuio guilhotina)
-    private var checkBoxIsCutPaperBarCode: CheckBox?,
+    private lateinit var checkBoxIsCutPaperBarCode: CheckBox
 
     //Texto rótulos na tela, que apresentam as palavras "largura" e "altura". (caso o tipo de código de barras selecionado seja QRCode, esse rótulo deve ser subsítuido pela palavra "square")
     //uma vez que QRCode é código quadrático.
-    private var textViewBarCodeWidth: TextView?,
+    private lateinit var textViewBarCodeWidth: TextView
     //Texto rótulos na tela, que apresentam as palavras "largura" e "altura". (caso o tipo de código de barras selecionado seja QRCode, esse rótulo deve ser subsítuido pela palavra "square")
 
     //uma vez que QRCode é código quadrático.
-    private var textViewBarCodeHeight: TextView?,
+    private lateinit var textViewBarCodeHeight: TextView
 
     //O rótulo, "estilização" é omitido caso o código não seja QRCODE ou CODE 128, para o SmartPOS.
-    private var textViewEstilizacao: TextView?,
+    private lateinit var textViewEstilizacao: TextView
 
     //Botão de impressão de código de barras.
-    private var buttonPrinterBarCode: Button?,
-
-): AppCompatActivity() {
-
+    private lateinit var buttonPrinterBarCode: Button
 
     //Opções de alinhamento.
     private enum class Alignment(  //O alinhamento é inserido através de um int para os comandos, portanto a cada opção é atribuída um valor.

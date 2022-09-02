@@ -28,23 +28,22 @@ import org.json.JSONException
 import java.util.regex.Pattern
 
 
-class PrinterMenuActivity(
+class PrinterMenuActivity(): AppCompatActivity(){
+
     //RadioGroup de seleção de conexão de impressora interna OU externa.
-    private var radioGroupPrinterConnection: RadioGroup?,
+    private lateinit var radioGroupPrinterConnection: RadioGroup
 
     //RadioButton referente à conexão de impressora interna.
-    private var radioButtonConnectPrinterIntern: RadioButton?,
+    private lateinit var radioButtonConnectPrinterIntern: RadioButton
 
     //Campo de IP.
-    private var editTextInputIP: EditText?,
+    private lateinit var editTextInputIP: EditText
 
     //Botões.
-    private var buttonPrinterText: Button?,
-    private var buttonPrinterBarCode: Button?,
-    private var buttonPrinterImage: Button?,
-    private var buttonStatusPrinter: Button?
-
-): AppCompatActivity(){
+    private lateinit var buttonPrinterText: Button
+    private lateinit var buttonPrinterBarCode: Button
+    private lateinit var buttonPrinterImage: Button
+    private lateinit var buttonStatusPrinter: Button
 
     //Método de conexão de impressora, externa e interna.
     enum class PrinterConnectionMethod {

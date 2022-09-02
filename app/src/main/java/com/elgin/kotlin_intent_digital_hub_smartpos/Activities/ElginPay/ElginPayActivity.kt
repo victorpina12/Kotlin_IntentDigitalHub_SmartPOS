@@ -33,54 +33,55 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 
-class ElginPayActivity(//Campos de valor e parcelas.
-    var editTextValue: EditText?,
+class ElginPayActivity(
+) : AppCompatActivity() {
 
     //Campos de valor e parcelas.
-    var editTextNumberOfInstallments: EditText?,
+    lateinit var editTextValue: EditText;
+
+    //Campos de valor e parcelas.
+    lateinit var editTextNumberOfInstallments: EditText
 
     //Botões de tipos de pagamento.
-    var buttonCreditOption: Button?,
+    lateinit var buttonCreditOption: Button
 
     //Botões de tipos de pagamento.
-    var buttonDebitOption: Button?,
+    lateinit var buttonDebitOption: Button
 
     //Botões de tipo de financiamento;
-    var buttonStoreOption: Button?,
+    lateinit var buttonStoreOption: Button
 
     //Botões de tipo de financiamento;
-    var buttonAdmOption: Button?,
+    lateinit var buttonAdmOption: Button
 
     //Botões de tipo de financiamento;
-    var buttonInCashOption: Button?,
+    lateinit var buttonInCashOption: Button
 
     //Checkbox de customização de layout.
-    var checkBoxCustomLayout: CheckBox?,
+    lateinit var checkBoxCustomLayout: CheckBox
 
     //Botões de ação.
-    var buttonSendTransaction: Button?,
+    lateinit var buttonSendTransaction: Button
 
     //Botões de ação.
-    var buttonCancelTransaction: Button?,
+    lateinit var buttonCancelTransaction: Button
 
     //Botões de ação.
-    var buttonInitializeAdmOperation: Button?,
+    lateinit var buttonInitializeAdmOperation: Button
 
     //Váriaveis de controle das opções selecionadas, inicializadas com os valores iniciais ao abrir a tela.
 
-
     //Forma de pagamento selecionada.
-    var selectedPaymentMethod: FormaPagamento = FormaPagamento.CREDITO,
+    var selectedPaymentMethod: FormaPagamento = FormaPagamento.CREDITO
 
     //Forma de financiamento selecionada.
-    var selectedInstallmentMethod: FormaFinanciamento = FormaFinanciamento.FINANCIAMENTO_A_VISTA,
+    var selectedInstallmentMethod: FormaFinanciamento = FormaFinanciamento.FINANCIAMENTO_A_VISTA
 
     //Caputa o layout referente ao campo de "número de parcelas", para aplicar a loǵica de sumir este campo caso o pagamento por débito seja selecionado.
-    var linearLayoutNumberOfInstallments: LinearLayout?,
+    lateinit var linearLayoutNumberOfInstallments: LinearLayout
 
     //Catura o layout referente aos botoões de financiamento, para aplicar a lógica de sumir estas opções caso o pagamento por débito seja selecionado.
-    var linearLayoutInstallmentsMethods: LinearLayout?,
-): AppCompatActivity() {
+    lateinit var linearLayoutInstallmentsMethods: LinearLayout
 
     //Códigos utilizados para filtros dos comandos, necessário para o ínicio de um intent e para que seu resultado possa ser capturado em @onActivityResult.
 
@@ -110,10 +111,11 @@ class ElginPayActivity(//Campos de valor e parcelas.
     private fun viewsAssignment() {
         editTextValue = findViewById<EditText>(R.id.editTextInputValue)
         //Aplica a máscara de moeda ao campo de valor, para melhor formatação do valor entrado.
-        editTextValue?.addTextChangedListener(InputMaskMoney(editTextValue!!))
+        editTextValue.addTextChangedListener(InputMaskMoney(editTextValue))
         //Valor inicial.
-        editTextValue?.setText("2000")
-        editTextNumberOfInstallments = findViewById<EditText>(R.id.editTextInputNumberOfInstallments)
+        editTextValue.setText("2000")
+        editTextNumberOfInstallments =
+            findViewById<EditText>(R.id.editTextInputNumberOfInstallments)
         //Número de parcelas inicial.
         editTextNumberOfInstallments!!.setText("2")
         buttonCreditOption = findViewById<Button>(R.id.buttonCreditOption)
@@ -125,20 +127,22 @@ class ElginPayActivity(//Campos de valor e parcelas.
         buttonSendTransaction = findViewById<Button>(R.id.buttonSendTransaction)
         buttonCancelTransaction = findViewById<Button>(R.id.buttonCancelTransaction)
         buttonInitializeAdmOperation = findViewById<Button>(R.id.buttonInitializeAdmOperation)
-        linearLayoutNumberOfInstallments = findViewById<LinearLayout>(R.id.linearLayoutNumberOfInstallments)
-        linearLayoutInstallmentsMethods = findViewById<LinearLayout>(R.id.linearLayoutInstallmentsMethods)
+        linearLayoutNumberOfInstallments =
+            findViewById<LinearLayout>(R.id.linearLayoutNumberOfInstallments)
+        linearLayoutInstallmentsMethods =
+            findViewById<LinearLayout>(R.id.linearLayoutInstallmentsMethods)
     }
 
     //Decoração inicial das bordas, de acordo com os valores iniciais escolhidos. (pagamento via crédito e parcelamento via loja)
     private fun initalBusinessRule() {
         //Borda verde.
-        val GREEN_BORDER = AppCompatResources.getColorStateList( this,R.color.verde)
+        val GREEN_BORDER = AppCompatResources.getColorStateList(this, R.color.verde)
         buttonCreditOption!!.backgroundTintList = GREEN_BORDER
         buttonStoreOption!!.backgroundTintList = GREEN_BORDER
     }
+
     //Atribuição das funcionalidades a cada view.
-    private fun viewsFunctionalityAssignment()
-    {
+    private fun viewsFunctionalityAssignment() {
         buttonCreditOption!!.setOnClickListener { v: View? ->
             updatePaymentMethodBusinessRule(
                 FormaPagamento.CREDITO
@@ -174,7 +178,8 @@ class ElginPayActivity(//Campos de valor e parcelas.
 
         buttonSendTransaction!!.setOnClickListener { v: View? ->
             if (selectedPaymentMethod === FormaPagamento.CREDITO) sendCreditTransaction()
-            else sendDebitTransaction() }
+            else sendDebitTransaction()
+        }
         buttonCancelTransaction!!.setOnClickListener { v: View? -> cancelTransaction() }
 
         buttonInitializeAdmOperation!!.setOnClickListener { v: View? -> initializeAdmOperation() }
@@ -188,9 +193,9 @@ class ElginPayActivity(//Campos de valor e parcelas.
         //1. Muda a coloração da borda dos botões de crédito e débito, conforme a opção selecionda.
 
         //Borda verde.
-        val GREEN_BORDER = AppCompatResources.getColorStateList( this,R.color.verde)
+        val GREEN_BORDER = AppCompatResources.getColorStateList(this, R.color.verde)
         //Borda preta.
-        val BLACK_BORDER = AppCompatResources.getColorStateList( this,R.color.black)
+        val BLACK_BORDER = AppCompatResources.getColorStateList(this, R.color.black)
         buttonCreditOption!!.backgroundTintList =
             if (selectedPaymentMethod === FormaPagamento.CREDITO) GREEN_BORDER else BLACK_BORDER
         buttonDebitOption!!.backgroundTintList =
@@ -245,9 +250,9 @@ class ElginPayActivity(//Campos de valor e parcelas.
                 YELLOW,
                 BLACK,
                 YELLOW,
-                YELLOW,
-                BLACK
-            )
+                YELLOW
+            );
+
             IntentDigitalHubCommandStarter.startIDHCommandForResult(
                 this,
                 setPersonalizacaoCommand,
@@ -266,9 +271,9 @@ class ElginPayActivity(//Campos de valor e parcelas.
                 ELGINPAY_BLUE,
                 WHITE,
                 ELGINPAY_BLUE,
-                ELGINPAY_BLUE,
-                WHITE
-            )
+                ELGINPAY_BLUE
+            );
+
             IntentDigitalHubCommandStarter.startIDHCommandForResult(
                 this,
                 setPersonalizacaoCommand,
@@ -281,7 +286,7 @@ class ElginPayActivity(//Campos de valor e parcelas.
         //Validações
         if (isValueValidForElginPayTransaction() && isNumberOfInstallmentsValidForCreditTransaction()) {
             val valorTotal: String = getValueTreated()
-            val tipoFinanciamento: Int = selectedInstallmentMethod.getCodigoFormaParcelamento()
+            val tipoFinanciamento: Int = selectedInstallmentMethod.codigoFormaParcelamento
             val numeroParcelas = editTextNumberOfInstallments!!.text.toString().toInt()
             val iniciaVendaCreditoCommand =
                 IniciaVendaCredito(valorTotal, tipoFinanciamento, numeroParcelas)
@@ -305,6 +310,7 @@ class ElginPayActivity(//Campos de valor e parcelas.
             )
         }
     }
+
     private fun cancelTransaction() {
         //Para capturar a referência da venda a partir do input do usuário, é feito um dialog com input.
         val builder = AlertDialog.Builder(this)
@@ -356,6 +362,7 @@ class ElginPayActivity(//Campos de valor e parcelas.
         }
         builder.show()
     }
+
     private fun initializeAdmOperation() {
         val iniciaOperacaoAdministrativaCommand = IniciaOperacaoAdministrativa()
         IntentDigitalHubCommandStarter.startIDHCommandForResult(
@@ -375,7 +382,7 @@ class ElginPayActivity(//Campos de valor e parcelas.
     }
 
     //Capturando o resultado dos comandos onde o resultado é utilizado em tela.
-     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             //O retorno dos comandos no IDH, está sempre sob a chave "retorno", no extra da intent de retorno.
@@ -492,4 +499,4 @@ class ElginPayActivity(//Campos de valor e parcelas.
             false
         }
     }
-    }
+}

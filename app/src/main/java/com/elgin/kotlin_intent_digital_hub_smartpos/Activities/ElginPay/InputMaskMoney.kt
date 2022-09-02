@@ -14,6 +14,10 @@ class InputMaskMoney(editText: EditText): TextWatcher{
     //Referência necessária para atribuir valor ao campo em questão
     private var editTextWeakReference: WeakReference<EditText>? = null
 
+    init {
+        editTextWeakReference = WeakReference(editText)
+    }
+
     //Váriavél sentinela utilizada para impedir loop em caso de a mudança ter sido feita pelo própio TextWatcher
     var _ignore = false
 
@@ -44,7 +48,7 @@ class InputMaskMoney(editText: EditText): TextWatcher{
             NumberFormat.getCurrencyInstance().format(newValueInBigDecimal)
         //Removendo o símbolo da moeda (é possível que o símbolo da moeda contenha caracteres que precisam ser escapados, por esta razão são agrupados no regex)
         val newValueInCurrencyClean = newValueFormattedInCurrency.replace(
-            "[" + NumberFormat.getCurrencyInstance().currency.symbol + "]".toRegex(),
+            "[R$]".toRegex(),
             ""
         )
 

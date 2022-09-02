@@ -17,40 +17,40 @@ import com.elgin.kotlin_intent_digital_hub_smartpos.IntentDigitalHubService.TERM
 import com.elgin.kotlin_intent_digital_hub_smartpos.R
 
 
-class PrinterTextActivity(
+class PrinterTextActivity(): AppCompatActivity() {
+
     //Campo de mensagem a ser impressa.
-    private var editTextInputMessage: EditText?,
+    private lateinit var editTextInputMessage: EditText
 
     //Botões de impressão.
-    private var buttonPrintText: Button?,
+    private lateinit var buttonPrintText: Button
 
     //Botões de impressão.
-    private var buttonPrinterNFCe: Button?,
+    private lateinit var buttonPrinterNFCe: Button
 
     //Botões de impressão.
-    private var buttonPrinterSAT: Button?,
+    private lateinit var buttonPrinterSAT: Button
 
     //RadioGroup de alinhamento.
-    private var radioGroupAlign: RadioGroup?,
+    private lateinit var radioGroupAlign: RadioGroup
 
     //RadioButton de alinhamento no centralizado.
-    private var buttonRadioCenter: RadioButton?,
+    private lateinit var buttonRadioCenter: RadioButton
 
     //Spinner/Dropwdown de seleção de fonte e tamanho da fonte.
-    private var spinnerFontFamily: Spinner?,
+    private lateinit var spinnerFontFamily: Spinner
 
     //Spinner/Dropwdown de seleção de fonte e tamanho da fonte.
-    private var spinnerFontSize: Spinner?,
+    private lateinit var spinnerFontSize: Spinner
 
     //Chebox de opções negrito/sublinhado e corte de papel. (a opção de corte de papel só é ofericda na impressão por impressora externa, o dispositivo SmartPOS não possuio guilhotina)
-    private var checkBoxIsBold: CheckBox?,
-
-  //Chebox de opções negrito/sublinhado e corte de papel. (a opção de corte de papel só é ofericda na impressão por impressora externa, o dispositivo SmartPOS não possuio guilhotina)
-    private var checkBoxIsUnderLine: CheckBox?,
+    private lateinit var checkBoxIsBold: CheckBox
 
     //Chebox de opções negrito/sublinhado e corte de papel. (a opção de corte de papel só é ofericda na impressão por impressora externa, o dispositivo SmartPOS não possuio guilhotina)
-    private var checkBoxIsCutPaper: CheckBox?
-): AppCompatActivity() {
+    private lateinit var checkBoxIsUnderLine: CheckBox
+
+    //Chebox de opções negrito/sublinhado e corte de papel. (a opção de corte de papel só é ofericda na impressão por impressora externa, o dispositivo SmartPOS não possuio guilhotina)
+    private lateinit var checkBoxIsCutPaper: CheckBox
 
 
     //Opções de alinhamento.
@@ -230,7 +230,7 @@ class PrinterTextActivity(
 
     private fun printXmlSat() {
         //Realiza a leitura do xml no projeto em string.
-        val dados: String = readXmlFileFromProjectAsString(this, ActivityUtils.ProjectXml.XML_NFCE)
+        val dados: String = readXmlFileFromProjectAsString(this, ActivityUtils.ProjectXml.XML_SAT)
         val param = 0
         val imprimeXMLSATCommand = ImprimeXMLSAT(dados, param)
         val avancaPapelCommand = AvancaPapel(10)

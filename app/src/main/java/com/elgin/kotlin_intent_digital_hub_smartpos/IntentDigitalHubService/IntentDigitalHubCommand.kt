@@ -6,14 +6,11 @@ import com.google.gson.JsonObject
 /**
  * Classe abstrata que generaliza as carecterísticas comuns à todos os comandos do Intent Digital Hub, as classes que herdam desta implementam cada comando de maneira específica servindo como Wrapper
  */
-abstract class IntentDigitalHubCommand(functionName: String, correspondingIntentModule: IntentDigitalHubModule) {
-    //Nome da função
-    protected val functionName: String? = null
-
-    //Módulo a qual a função pertence
-    val correspondingIntentModule: IntentDigitalHubModule? = null
-
-
+abstract class IntentDigitalHubCommand
+    (//Nome da função
+    protected val functionName: String, //Módulo a qual a função pertence
+    val correspondingIntentModule: IntentDigitalHubModule
+) {
 
     /**
      * Um comando do IDH deve ser um JSON com o seguinte formato: {funcao:"nomeDaFuncao", parametros:{}}.
