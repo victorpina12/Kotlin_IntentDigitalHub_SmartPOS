@@ -1,12 +1,11 @@
 package com.elgin.kotlin_intent_digital_hub_smartpos.Activities.Printer.PrinterPages
 
+import ActivityUtils.readXmlFileFromProjectAsString
+import ActivityUtils.showAlertMessage
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.elgin.kotlin_intent_digital_hub_smartpos.Activities.ActivityUtils.ProjectXml.XML_NFCE
-import com.elgin.kotlin_intent_digital_hub_smartpos.Activities.ActivityUtils.readXmlFileFromProjectAsString
-import com.elgin.kotlin_intent_digital_hub_smartpos.Activities.ActivityUtils.showAlertMessage
 import com.elgin.kotlin_intent_digital_hub_smartpos.Activities.Printer.PrinterMenuActivity
 import com.elgin.kotlin_intent_digital_hub_smartpos.IntentDigitalHubService.IntentDigitalHubCommand
 import com.elgin.kotlin_intent_digital_hub_smartpos.IntentDigitalHubService.IntentDigitalHubCommandStarter
@@ -208,7 +207,7 @@ class PrinterTextActivity(
 
     private fun printXmlNfce() {
         //Realiza a leitura do xml no projeto em string.
-        val dados: String = readXmlFileFromProjectAsString(this, XML_NFCE)
+        val dados: String = readXmlFileFromProjectAsString(this, ActivityUtils.ProjectXml.XML_NFCE)
         val indexcsc = 1
         val csc = "CODIGO-CSC-CONTRIBUINTE-36-CARACTERES"
         val param = 0
@@ -231,7 +230,7 @@ class PrinterTextActivity(
 
     private fun printXmlSat() {
         //Realiza a leitura do xml no projeto em string.
-        val dados: String = readXmlFileFromProjectAsString(this, XML_NFCE)
+        val dados: String = readXmlFileFromProjectAsString(this, ActivityUtils.ProjectXml.XML_NFCE)
         val param = 0
         val imprimeXMLSATCommand = ImprimeXMLSAT(dados, param)
         val avancaPapelCommand = AvancaPapel(10)
